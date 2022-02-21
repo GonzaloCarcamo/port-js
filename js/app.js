@@ -22,3 +22,5 @@ projects_link.addEventListener("click", () => {
   render_projects.style.display = 'block'
   render_about.style.display = 'none'
 })
+
+
