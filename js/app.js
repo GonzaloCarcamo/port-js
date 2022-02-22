@@ -41,11 +41,21 @@ setProjects().then(projects => {
     p.classList.add('card-text')
     p.textContent = projects.data[i].attributes.desc
 
+    let a = document.createElement('a')
+    let button = document.createElement('button')
+    a.href = projects.data[i].attributes.link
+    button.textContent = 'Ver Proyecto'
+
+    let span = document.createElement('span')
+    
+
+    a.appendChild(button)
     div1.appendChild(div2)
     div2.appendChild(div3)
     div3.appendChild(img)
     div3.appendChild(div_body)
     div_body.appendChild(p)
+    div_body.appendChild(a)
     js_card.appendChild(div1)
   
   }
