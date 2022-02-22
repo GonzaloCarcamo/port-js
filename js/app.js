@@ -1,7 +1,17 @@
 let projects_cards = document.querySelector('#projects_cards');
+let spinner = document.querySelector('.spinner-border')
+
+window.addEventListener('DOMContentLoaded', () => {
+  projects_cards.style.display = 'none'
+
+  setTimeout(function () {
+    spinner.style.display = 'none'
+    projects_cards.style.display = ''
+  }, 1000)
+})
 
 async function setProjects() {
-  const response = await fetch('https://polar-refuge-19232.herokuapp.com/');
+  const response = await fetch('https://desolate-waters-44255.herokuapp.com/');
   const projects = await response.json();
   return projects;
 }
@@ -20,7 +30,9 @@ setProjects().then(projects => {
 
     let text_project = document.createElement('p')
     text_project.classList.add('text_project')
-    text_project.textContent = projects.data[i].attributes.desc
+    text_project.textContent = `
+      ${projects.data[i].attributes.title}
+      ${projects.data[i].attributes.desc}`
 
     let links_first = document.createElement('div')
     links_first.classList.add('links_first')
@@ -49,9 +61,6 @@ setProjects().then(projects => {
     card_project.appendChild(links_last)
     a.appendChild(button_project)
     links_last.appendChild(a)
-
-    
-
 
   }
 
