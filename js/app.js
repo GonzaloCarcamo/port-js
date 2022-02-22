@@ -1,4 +1,4 @@
-let js_card = document.querySelector('#js_card');
+let projects_cards = document.querySelector('#projects_cards');
 
 async function setProjects() {
   const response = await fetch('https://polar-refuge-19232.herokuapp.com/');
@@ -11,53 +11,48 @@ setProjects().then(projects => {
 
   for(i = 0; i < projects.data.length ; i++){
 
-    let div1 = document.createElement('div')
-    div1.classList.add('row')
-    div1.classList.add('row-cols-1')
-    div1.classList.add('row-cols-lg-3')
-    div1.classList.add('row-cols-sm-2')
-    div1.classList.add('row-cols-md-3')
-    div1.classList.add('g-3')
+    let card_project = document.createElement('div')
+    card_project.classList.add('card_project')
 
+    let img_project = document.createElement('img')
+    img_project.classList.add('img_project')
+    img_project.setAttribute("src", projects.data[i].attributes.img)
 
-    let div2 = document.createElement('div')
-    div2.classList.add('col')
+    let text_project = document.createElement('p')
+    text_project.classList.add('text_project')
+    text_project.textContent = projects.data[i].attributes.desc
 
-    let div3 = document.createElement('div')
-    div3.classList.add('card')
-    div3.classList.add('shadow-sm')
+    let links_first = document.createElement('div')
+    links_first.classList.add('links_first')
 
+    let h5 = document.createElement('h5')
+    h5.textContent = projects.data[i].attributes.category.title
+    let h6 = document.createElement('h6')
+    h6.textContent = `Level: ${projects.data[i].attributes.difficulty} / 5`
 
-    let img = document.createElement('img')
-    img.classList.add('card-img-top')
-    img.setAttribute("src", projects.data[i].attributes.img)
-    img.style.width = '100%'
-    img.style.height = '225px'
-
-    let div_body = document.createElement('div')
-    div_body.classList.add('card-body')
-
-    let p = document.createElement('p')
-    p.classList.add('card-text')
-    p.textContent = projects.data[i].attributes.desc
+    let links_last = document.createElement('section')
+    links_last.classList.add('links_last')
 
     let a = document.createElement('a')
-    let button = document.createElement('button')
     a.href = projects.data[i].attributes.link
-    button.textContent = 'Ver Proyecto'
 
-    let span = document.createElement('span')
+    let button_project = document.createElement('button')
+    button_project.classList.add('button_project')
+    button_project.textContent = 'Proyect'
+
+    projects_cards.appendChild(card_project)
+    card_project.appendChild(img_project)
+    card_project.appendChild(links_first)
+    links_first.appendChild(h5)
+    links_first.appendChild(h6)
+    card_project.appendChild(text_project)
+    card_project.appendChild(links_last)
+    a.appendChild(button_project)
+    links_last.appendChild(a)
+
     
 
-    a.appendChild(button)
-    div1.appendChild(div2)
-    div2.appendChild(div3)
-    div3.appendChild(img)
-    div3.appendChild(div_body)
-    div_body.appendChild(p)
-    div_body.appendChild(a)
-    js_card.appendChild(div1)
-  
+
   }
 
   
